@@ -99,6 +99,14 @@ http {
 
     {% include "http.d/ssl.conf" %}
 
+    {% if proxy_ssl_certificate %}
+      proxy_ssl_certificate {{ proxy_ssl_certificate }};
+    {% endif %}
+
+    {% if proxy_ssl_certificate_key %}
+      proxy_ssl_certificate_key {{ proxy_ssl_certificate_key }};
+    {% endif %}
+
     {% for file in "apicast.d/*.conf" | filesystem %}
       {% include file %}
     {% endfor %}

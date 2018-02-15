@@ -57,6 +57,8 @@ _M.default_environment = 'production'
 
 --- Default configuration.
 -- @tfield ?string ca_bundle path to CA store file
+-- @tfield ?string proxy_ssl_certificate path to SSL certificate
+-- @tfield ?string proxy_ssl_certificate_key path to SSL certificate key
 -- @tfield ?policy_chain policy_chain @{policy_chain} instance
 -- @tfield ?{string,...} nameservers list of nameservers
 -- @tfield ?string package.path path to load Lua files
@@ -64,6 +66,8 @@ _M.default_environment = 'production'
 -- @table environment.default_config default configuration
 _M.default_config = {
     ca_bundle = resty_env.value('SSL_CERT_FILE'),
+    proxy_ssl_certificate = resty_env.value('SSL_PROXY_CERTIFICATE'),
+    proxy_ssl_certificate_key = resty_env.value('SSL_PROXY_CERTIFICATE_KEY'),
     policy_chain = require('apicast.policy_chain').default(),
     nameservers = parse_nameservers(),
     worker_processes = cpus() or 'auto',
